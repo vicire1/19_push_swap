@@ -6,11 +6,17 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:14:14 by vdecleir          #+#    #+#             */
-/*   Updated: 2023/12/06 18:18:36 by vdecleir         ###   ########.fr       */
+/*   Updated: 2023/12/07 17:12:05 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int error_message(void)
+{
+    write(1, "Error\n", 7);
+    return (0);
+}
 
 static int	ft_isdigit(int c)
 {
@@ -27,11 +33,10 @@ static int one_arg(char *arg)
     i = 0;
     while (arg[i])
     {
+        if (arg[i] == '-')
+            i++;
         if (ft_isdigit(arg[i]) == 0)
-        {
-            write(1, "Error\n", 7);
-            return (0);
-        }
+            return (error_message());
         while (ft_isdigit(arg[i]) == 1)
             i++;
         if (arg[i] == ' ')
@@ -42,16 +47,31 @@ static int one_arg(char *arg)
 
 static int arg_checker(int ac, char **av)
 {
+    int i;
+    int j;
     
+    i = 1;
+    while (i < ac)
+    {
+        j = 0;
+        if (av[i][j] == '-')
+            j++;
+        if (ft_isdigit(av[i][j]) == 0)
+            return (error_message());
+        while (ft_isdigit(av[i][j]) == 1)
+            j++;
+        if (av[i][j] != '\0')
+            return (error_message());
+        i++;
+    }
+    return (1);
 }
 
 int main(int ac, char **av)
 {
-    if (ac == 1)
-        return (0);
-    else if (ac == 2)
-        one_arg(av[1]);
-    else if (ac > 2)
-        arg_checker(ac, av);
+    // else if (ac == 2 && one_arg(av[1]) == 1)
+    //     put_in_a_1(av[1]);
+    if (ac > 2 && arg_checker(ac, av) == 1)
+        put_in_a(ac, av);
     return (0);
 }
