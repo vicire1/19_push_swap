@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 14:53:38 by vdecleir          #+#    #+#             */
-/*   Updated: 2023/12/07 17:22:17 by vdecleir         ###   ########.fr       */
+/*   Updated: 2023/12/08 16:38:59 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static long long	ft_atoi(char *str)
 	i = 0;
 	sign = 1;
 	nb = 0;
-    while (str[i])
-        i++;
-    if (i > 11)
-        return (2147483648);
-    i = 0;
+	while (str[i])
+		i++;
+	if (i > 11)
+		return (2147483648);
+	i = 0;
 	if (str[i] == '-')
 	{
 		sign = -sign;
@@ -39,34 +39,34 @@ static long long	ft_atoi(char *str)
 	return (nb * sign);
 }
 
-int    put_in_a(int ac, char **av)
+int	*put_in_a(int ac, char **av)
 {
-    int         *a;
-    long long   nb;
-    int         i;
-    int         j;
+	int			*a;
+	long long	nb;
+	int			i;
+	int			j;
 
-    a = malloc(sizeof(int *) * (ac - 1));
-    if (!a)
-        return (0);
-    i = 0;
-    while (ac > 1)
-    {
-        j = 0;
-        nb = ft_atoi(av[ac - 1]);
-        if (nb > INT32_MAX || nb < INT32_MIN)
-            return (error_message());
-        while (j < i)
-        {
-            if (a[j] == nb)
-                return (error_message());
-            j++;
-        }
-        a[i] = nb;
-        i++;
-        ac--;
-    }
-    return (1);
+	a = malloc(sizeof(int *) * (ac - 1));
+	if (!a)
+		return (0);
+	i = 0;
+	while (ac > 1)
+	{
+		j = 0;
+		nb = ft_atoi(av[ac - 1]);
+		if (nb > INT32_MAX || nb < INT32_MIN)
+			return (error_message());
+		while (j < i)
+		{
+			if (a[j] == nb)
+				return (error_message());
+			j++;
+		}
+		a[i] = (int)nb;
+		i++;
+		ac--;
+	}
+	return (a);
 }
 
 // void    put_in_a_1(char *str)
@@ -87,5 +87,7 @@ int    put_in_a(int ac, char **av)
 //             j++;
 //         }
 //         nb = ft_atoi(temp);
+//         if (str[i] == ' ')
+//             i++;
 //     }
 // }
