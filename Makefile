@@ -6,7 +6,7 @@
 #    By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 15:19:03 by vdecleir          #+#    #+#              #
-#    Updated: 2024/01/06 20:16:37 by vdecleir         ###   ########.fr        #
+#    Updated: 2024/01/07 19:15:46 by vdecleir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ RM = rm -rf
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS =	srcs/main.c\
+		srcs/arg_check.c\
 		srcs/utils.c\
 
 OBJ_DIR = objets

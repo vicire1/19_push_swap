@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:13:25 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/01/07 18:54:40 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/01/07 19:12:56 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_data {
     long long   *b;
 }           t_data;
 
+int         organize_arg(t_data *data, int ac, char **av);
 int         error_message();
 int	        freetab(t_data *data, int n);
 long long	ft_atol(const char *str);
