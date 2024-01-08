@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 15:55:06 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/01/07 17:37:36 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/01/08 19:21:30 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int error_message()
 {
     write(1, "Error\n", 7);
-    return (-1);
+    exit (0);
 }
 
-int	freetab(t_data *data, int n)
+void	freetab(t_data *data, int n, int show_mess)
 {
 	int	i;
 
@@ -31,14 +31,15 @@ int	freetab(t_data *data, int n)
 	}
 	free(data->tab);
 	data->tab = NULL;
-	return (-1);
+	if (show_mess == 1)
+		error_message();
 }
 
 long long	ft_atol(const char *str)
 {
-	int					i;
-	int					sign;
-	unsigned long long	nb;
+	int			i;
+	int			sign;
+	long long	nb;
 
 	i = 0;
 	sign = 1;
@@ -51,10 +52,18 @@ long long	ft_atol(const char *str)
 			sign = -sign;
 		i++;
 	}
-	while (str[i] > 47 && str[i] < 58 && nb < 9223372036854775807)
+	while (str[i] > 47 && str[i] < 58)
 	{
 		nb = nb * 10 + (str[i] - 48);
+		if (nb * sign > 2147483647 || nb * sign < -2147483648)
+			return (2147483648);
 		i++;
 	}
 	return (nb * sign);
+}
+
+int	free_array(int *array)
+{
+	free(array);
+	exit (0);
 }

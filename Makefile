@@ -6,7 +6,7 @@
 #    By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 15:19:03 by vdecleir          #+#    #+#              #
-#    Updated: 2024/01/07 19:15:46 by vdecleir         ###   ########.fr        #
+#    Updated: 2024/01/08 19:18:06 by vdecleir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS =	srcs/main.c\
 		srcs/arg_check.c\
 		srcs/utils.c\
+		srcs/index_in_stack.c
 
 OBJ_DIR = objets
 
@@ -37,19 +38,23 @@ $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(OBJS) -o $(NAME) $(LIBFT)
-	@echo "\n\033[1;32mCompilation complete.\033[0m"
+	@echo "\n\033[0;38;5;214mCompiling push_swap...\033[0m"
+	$(CC) $(OBJS) -o $(NAME) $(LIBFT_PATH)/$(LIBFT)
+	@echo "\n\033[1;32mThe push_swap executable is ready.\033[0m"
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_PATH)
-	mv $(LIBFT_PATH)/$(LIBFT) .
+	@echo "\n\033[0;38;5;214mCompiling Libft...\033[0m"
+	make -s -C $(LIBFT_PATH)
+	@echo "\n\033[0;32mLibft ready.\033[0m"
 
 clean:
-	$(MAKE) clean -C $(LIBFT_PATH)
+	make clean -s -C $(LIBFT_PATH)
 	$(RM) $(OBJ_DIR)
+	@echo "\n\033[0;33mObjects correctly deleted.\033[0m"
 
 fclean: clean
-	$(RM) $(NAME) $(LIBFT)
+	$(RM) $(NAME) $(LIBFT_PATH)/$(LIBFT)
+	@echo "\n\033[0;33mExecutable file(s) correctly deleted.\033[0m"
 
 re: fclean all
 

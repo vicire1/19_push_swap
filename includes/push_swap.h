@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:13:25 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/01/07 19:12:56 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/01/08 19:21:43 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,18 @@
 # include "../libft/libft.h"
 
 typedef struct s_data {
-    char        **tab;
-    int         nbrs;
-    long long   *a;
-    long long   *b;
+    char    **tab;
+    int     nbrs;
+    int     *int_tab;
+    int     *a;
+    int     *b;
 }           t_data;
 
 int         organize_arg(t_data *data, int ac, char **av);
 int         error_message();
-int	        freetab(t_data *data, int n);
+void	    freetab(t_data *data, int n, int show_mess);
 long long	ft_atol(const char *str);
+int         index_in_a(t_data *data);
+int         free_array(int *array);
 
 #endif

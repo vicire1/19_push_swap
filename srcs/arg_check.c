@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 19:10:16 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/01/07 19:16:04 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/01/08 20:27:54 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	arg_in_tab(t_data *data, int ac, char **av)
 		j = 0;
 		data->tab[i - 1] = malloc(sizeof(char) * ft_strlen(av[i]));
 		if (!data->tab[i - 1])
-			return (freetab(data, i - 1));
+			freetab(data, i - 1, 1);
 		while (av[i][j])
 		{
 			data->tab[i - 1][j] = av[i][j];
@@ -61,36 +61,38 @@ static int	arg_in_tab(t_data *data, int ac, char **av)
 	return (1);
 }
 
-static int	double_check(t_data *data, int i)
+static int	double_check(t_data *data, long long temp, int i)
 {
 	int	j;
 
 	j = 0;
 	while (j < i)
 	{
-		if (data->a[j] == data->a[i])
+		if (data->int_tab[j] == temp)
 			return (-1);
 		j++;
 	}
 	return (1);
 }
 
-static int	stack_in_a(t_data *data)
+static int	tab_in_stack(t_data *data)
 {
-	int	i;
+	int			i;
+	long long	temp;
 
 	i = 0;
-	data->a = malloc(sizeof(int) * (data->nbrs - 1));
-	if (!data->a)
-		return (freetab(data, data->nbrs));
+	data->int_tab = malloc(sizeof(int) * (data->nbrs));
+	if (!data->int_tab)
+		freetab(data, data->nbrs, 1);
 	while (i < data->nbrs)
 	{
-		data->a[i] = ft_atol(data->tab[data->nbrs - 1 - i]);
-		if (double_check(data, i) == -1 || data->a[i] < INT32_MIN || data->a[i] > INT32_MAX)
+		temp = ft_atol(data->tab[i]);
+		if (double_check(data, temp, i) == -1 || temp > INT32_MAX || temp < INT32_MIN)
 		{
-			free(data->a);
-			return (-1);
+			free(data->int_tab);
+			freetab(data, data->nbrs, 1);
 		}
+		data->int_tab[i] = temp;
 		i++;
 	}
 	return (1);
@@ -101,15 +103,19 @@ int	organize_arg(t_data *data, int ac, char **av)
 	if (ac == 1)
 		return (0);
 	else if (ac == 2)
+	{
 	    data->tab = ft_split(av[1], ' ');
+			if (!data->tab)
+				return (error_message());
+	}
 	else
 		arg_in_tab(data, ac, av);
-	if (!data->tab)
-		return (error_message());
 	data->nbrs = arg_checker(data->tab);
 	if (data->nbrs == -1)
-		return (freetab(data, data->nbrs), error_message());
-	if (stack_in_a(data) == -1)
-		return (freetab(data, data->nbrs), error_message());
+		freetab(data, data->nbrs, 1);
+	tab_in_stack(data);
+	index_in_a(data);
+	freetab(data, data->nbrs, 0);
+	free(data->int_tab);
 	return (1);
 }
