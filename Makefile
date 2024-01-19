@@ -6,7 +6,7 @@
 #    By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 15:19:03 by vdecleir          #+#    #+#              #
-#    Updated: 2024/01/08 19:18:06 by vdecleir         ###   ########.fr        #
+#    Updated: 2024/01/17 14:23:14 by vdecleir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,11 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS =	srcs/main.c\
 		srcs/arg_check.c\
 		srcs/utils.c\
-		srcs/index_in_stack.c
+		srcs/index_in_stack.c\
+		srcs/push.c\
+		srcs/rev_rotate.c\
+		srcs/rotate.c\
+		srcs/swap.c\
 
 OBJ_DIR = objets
 

@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:49:29 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/01/08 20:21:49 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/01/15 14:48:02 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int index_in_a(t_data *data)
     data->b = malloc(sizeof(int) * data->nbrs);
     if (!data->a || !data->b)
         free_array(data->int_tab);
+    data->size_a = data->nbrs;
+    data->size_b = 0;
     while (n < data->nbrs)
     {
         i = 0;
