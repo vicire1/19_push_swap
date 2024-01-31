@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:13:25 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/01/17 16:17:47 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/01/31 14:25:46 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int         error_message();
 void	    freetab(t_data *data, int n, int show_mess);
 long long	ft_atol(const char *str);
 int         index_in_a(t_data *data);
-int         free_array(int *array);
+int         free_array(int *array, int i);
 void        sa(t_data *data, int i);
 void        sb(t_data *data, int i);
 void        ss(t_data *data);
@@ -45,5 +45,12 @@ void        rr(t_data *data);
 void        rra(t_data *data, int bin);
 void        rrb(t_data *data, int bin);
 void        rrr(t_data *data);
+int         find_min_index(int *tab, int size);
+int         find_max_index(int *tab, int size);
+int         check_order(int *tab, int size);
+void        algo3(t_data *data);
+void        algo4(t_data *data);
+void        algo5(t_data *data);
+void	    radix(t_data *data);
 
 #endif

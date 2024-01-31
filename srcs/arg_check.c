@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 19:10:16 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/01/08 20:27:54 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/01/31 16:11:50 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static int	arg_checker(char **tab)
 
 static int	arg_in_tab(t_data *data, int ac, char **av)
 {
-	int 	i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = 1;
 	data->tab = malloc(sizeof(char *) * ac);
@@ -87,7 +87,8 @@ static int	tab_in_stack(t_data *data)
 	while (i < data->nbrs)
 	{
 		temp = ft_atol(data->tab[i]);
-		if (double_check(data, temp, i) == -1 || temp > INT32_MAX || temp < INT32_MIN)
+		if (double_check(data, temp, i) == -1 || temp > INT32_MAX
+			|| temp < INT32_MIN)
 		{
 			free(data->int_tab);
 			freetab(data, data->nbrs, 1);
@@ -104,14 +105,14 @@ int	organize_arg(t_data *data, int ac, char **av)
 		return (0);
 	else if (ac == 2)
 	{
-	    data->tab = ft_split(av[1], ' ');
-			if (!data->tab)
-				return (error_message());
+		data->tab = ft_split(av[1], ' ');
+		if (!data->tab)
+			return (error_message());
 	}
 	else
 		arg_in_tab(data, ac, av);
 	data->nbrs = arg_checker(data->tab);
-	if (data->nbrs == -1)
+	if (data->nbrs <= 0)
 		freetab(data, data->nbrs, 1);
 	tab_in_stack(data);
 	index_in_a(data);

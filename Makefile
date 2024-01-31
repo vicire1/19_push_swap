@@ -6,7 +6,7 @@
 #    By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 15:19:03 by vdecleir          #+#    #+#              #
-#    Updated: 2024/01/17 14:23:14 by vdecleir         ###   ########.fr        #
+#    Updated: 2024/01/30 17:40:36 by vdecleir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ SRCS =	srcs/main.c\
 		srcs/rev_rotate.c\
 		srcs/rotate.c\
 		srcs/swap.c\
+		srcs/algos.c\
+		srcs/utils_algo.c
 
 OBJ_DIR = objets
 
