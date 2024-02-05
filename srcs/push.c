@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:43:52 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/01/31 16:14:23 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/02/05 17:14:38 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	pa(t_data *data)
 			i--;
 		}
 		data->a[0] = data->b[0];
-		while (i < data->size_b)
+		while (i < data->size_b - 1)
 		{
 			data->b[i] = data->b[i + 1];
 			i++;
@@ -49,7 +49,7 @@ void	pb(t_data *data)
 			i--;
 		}
 		data->b[0] = data->a[0];
-		while (i < data->size_a)
+		while (i < data->size_a - 1)
 		{
 			data->a[i] = data->a[i + 1];
 			i++;

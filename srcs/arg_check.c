@@ -6,17 +6,21 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 19:10:16 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/01/31 16:11:50 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/02/05 18:40:53 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static int	arg_checker(char **tab)
+static int	arg_checker(t_data *data, char **tab)
 {
 	int	i;
 	int	j;
 
+	i = 0;
+	while (tab[i])
+		i++;
+	data->nbrs = i;
 	i = 0;
 	while (tab[i])
 	{
@@ -31,7 +35,7 @@ static int	arg_checker(char **tab)
 			return (-1);
 		i++;
 	}
-	return (i);
+	return (0);
 }
 
 static int	arg_in_tab(t_data *data, int ac, char **av)
@@ -42,11 +46,11 @@ static int	arg_in_tab(t_data *data, int ac, char **av)
 	i = 1;
 	data->tab = malloc(sizeof(char *) * ac);
 	if (!data->tab)
-		return (-1);
+		return (error_message());
 	while (i < ac)
 	{
 		j = 0;
-		data->tab[i - 1] = malloc(sizeof(char) * ft_strlen(av[i]));
+		data->tab[i - 1] = malloc(sizeof(char) * (ft_strlen(av[i]) + 1));
 		if (!data->tab[i - 1])
 			freetab(data, i - 1, 1);
 		while (av[i][j])
@@ -101,6 +105,10 @@ static int	tab_in_stack(t_data *data)
 
 int	organize_arg(t_data *data, int ac, char **av)
 {
+	int	rtn_check;
+	int	n;
+
+	n = 0;
 	if (ac == 1)
 		return (0);
 	else if (ac == 2)
@@ -111,12 +119,13 @@ int	organize_arg(t_data *data, int ac, char **av)
 	}
 	else
 		arg_in_tab(data, ac, av);
-	data->nbrs = arg_checker(data->tab);
-	if (data->nbrs <= 0)
+	rtn_check = arg_checker(data, data->tab);
+	if (rtn_check == -1)
 		freetab(data, data->nbrs, 1);
 	tab_in_stack(data);
-	index_in_a(data);
+	if (index_in_a(data, n) == -1)
+		freetab(data, data->nbrs, 1);
 	freetab(data, data->nbrs, 0);
-	free(data->int_tab);
+	free_array(data->int_tab, 0);
 	return (1);
 }

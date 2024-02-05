@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:54:24 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/01/31 16:11:45 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/02/05 13:50:46 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,15 @@ void	algo5(t_data *data)
 	}
 }
 
-static void	radix_b(t_data *data, int b_size, int bit_max, int j)
+static void	radix_b(t_data *data, int b_size, int nb_bits, int j)
 {
-	while (b_size-- && j <= bit_max && !check_order(data->b, data->size_b))
+	while (b_size && j <= nb_bits && !check_order(data->b, data->size_b))
 	{
 		if (((data->b[0] >> j) & 1) == 0)
 			rb(data, 0);
 		else
 			pa(data);
+		b_size--;
 	}
 	if (check_order(data->b, data->size_b))
 	{
@@ -96,25 +97,27 @@ static void	radix_b(t_data *data, int b_size, int bit_max, int j)
 void	radix(t_data *data)
 {
 	int	j;
-	int	bit_max;
+	int	nb_bits;
 	int	size;
 
-	bit_max = 0;
+	nb_bits = 0;
 	size = data->size_a;
-	while (size > 1 && ++bit_max)
+	while (size > 1 && ++nb_bits)
 		size /= 2;
-	j = -1;
-	while (++j <= bit_max)
+	j = 0;
+	while (j <= nb_bits)
 	{
 		size = data->size_a;
-		while (size-- && !check_order(data->a, data->size_a))
+		while (size && !check_order(data->a, data->size_a))
 		{
 			if (((data->a[0] >> j) & 1) == 0)
 				pb(data);
 			else
 				ra(data, 0);
+			size--;
 		}
-		radix_b(data, data->size_b, bit_max, j + 1);
+		radix_b(data, data->size_b, nb_bits, j + 1);
+		j++;
 	}
 	while (data->size_b != 0)
 		pa(data);

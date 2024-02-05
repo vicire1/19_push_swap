@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 15:55:06 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/01/31 16:14:32 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/02/05 18:25:23 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	error_message(void)
 {
-	write(2, "Error\n", 7);
+	write(2, "Error\n", 6);
 	exit(0);
 }
 
@@ -67,6 +67,6 @@ int	free_array(int *array, int i)
 	free(array);
 	array = NULL;
 	if (i == 1)
-		exit(0);
-	return (0);
+		error_message();
+	return (-1);
 }
