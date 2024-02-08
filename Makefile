@@ -6,9 +6,15 @@
 #    By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 15:19:03 by vdecleir          #+#    #+#              #
-#    Updated: 2024/01/30 17:40:36 by vdecleir         ###   ########.fr        #
+#    Updated: 2024/02/08 13:23:02 by vdecleir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+GREEN = \033[0;32m
+GREEN_BOLD = \033[1;32m
+ORANGE = \033[0;38;5;214m
+YELLOW = \033[0;33m
+CLOSE = \033[0m
 
 NAME = push_swap
 
@@ -37,30 +43,33 @@ LIBFT = libft.a
 
 LIBFT_PATH = ./libft
 
-all: $(NAME)
+LIBFT_FLAG = $(LIBFT_PATH)/.libcompiled
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJS) $(LIBFT)
-	@echo "\n\033[0;38;5;214mCompiling push_swap...\033[0m"
-	$(CC) $(OBJS) -o $(NAME) $(LIBFT_PATH)/$(LIBFT)
-	@echo "\n\033[1;32mThe push_swap executable is ready.\033[0m"
+all: $(LIBFT_FLAG) $(NAME)
 
-$(LIBFT):
-	@echo "\n\033[0;38;5;214mCompiling Libft...\033[0m"
-	make -s -C $(LIBFT_PATH)
-	@echo "\n\033[0;32mLibft ready.\033[0m"
+$(NAME): $(OBJS)
+	@echo "$(ORANGE)Compiling push_swap...$(CLOSE)"
+	@$(CC) $(OBJS) -L$(LIBFT_PATH) -lft -o $(NAME)
+	@echo "$(GREEN_BOLD)The push_swap executable is ready.$(CLOSE)"
+
+$(LIBFT_FLAG):
+	@echo "$(ORANGE)Compiling Libft...$(CLOSE)"
+	@make -s -C $(LIBFT_PATH)
+	@echo "$(GREEN)Libft ready.$(CLOSE)"
+	@touch $(LIBFT_FLAG)
 
 clean:
-	make clean -s -C $(LIBFT_PATH)
-	$(RM) $(OBJ_DIR)
-	@echo "\n\033[0;33mObjects correctly deleted.\033[0m"
+	@$(MAKE) clean -s -C $(LIBFT_PATH)
+	@$(RM) $(OBJ_DIR)
+	@echo "$(YELLOW)Objects correctly deleted.$(CLOSE)"
 
 fclean: clean
-	$(RM) $(NAME) $(LIBFT_PATH)/$(LIBFT)
-	@echo "\n\033[0;33mExecutable file(s) correctly deleted.\033[0m"
+	@$(RM) $(NAME) $(LIBFT_PATH)/$(LIBFT) $(LIBFT_FLAG)
+	@echo "$(YELLOW)Executable file(s) correctly deleted.$(CLOSE)"
 
 re: fclean all
 

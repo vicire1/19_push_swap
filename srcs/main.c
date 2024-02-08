@@ -6,7 +6,7 @@
 /*   By: vdecleir <vdecleir@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:14:14 by vdecleir          #+#    #+#             */
-/*   Updated: 2024/02/05 17:54:24 by vdecleir         ###   ########.fr       */
+/*   Updated: 2024/02/08 17:47:28 by vdecleir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
+	data.nbrs = 0;
 	if (organize_arg(&data, ac, av) == -1)
 		return (-1);
 	dispatch(&data);
