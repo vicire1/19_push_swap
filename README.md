@@ -6,7 +6,7 @@
 
 The **Push_swap** project is a data sorting algorithm challenge where you are tasked with sorting a stack of integers using a limited set of operations. The goal is to find the most efficient way to sort the numbers with the least number of moves. This project emphasizes the importance of algorithmic complexity and is a key exercise in learning about sorting algorithms, which are a common topic in technical interviews.
 
-## Learning Objectives
+## Project Objectives
 
 - **Algorithmic Complexity**: Understanding and implementing efficient algorithms.
 - **C Programming**: Enhancing skills in C, focusing on memory management, and adhering to coding norms.
