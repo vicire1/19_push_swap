@@ -46,7 +46,7 @@ To compile the project, a `Makefile` is provided with the following rules:
 - `make re`: Recompile the project.
 
 ```bash
-make
+$ make
 ```
 
 ### Usage
@@ -54,7 +54,7 @@ make
 To run the push_swap program, pass a list of integers as arguments:
 
 ```bash
-./push_swap 2 1 3 6 5 8
+$ ./push_swap 2 1 3 6 5 8
 ```
 
 This will output a series of operations that will sort the stack in ascending order.
